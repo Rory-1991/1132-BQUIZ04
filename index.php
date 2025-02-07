@@ -26,11 +26,11 @@
         <div id="left" class="ct">
         	<div style="min-height:400px;">
         	            </div>
-                        <span>
+        <span>
             	<div>進站總人數</div>
                 <div style="color:#f00; font-size:28px;">
                 	00005                </div>
-            </span>
+        </span>
                     </div>
         <div id="right">
         	        </div>
