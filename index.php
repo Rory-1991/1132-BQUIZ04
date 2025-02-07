@@ -10,7 +10,7 @@
 <body>
 <iframe name="back" style="display:none;"></iframe>
 <div id="main">
-        
+
     	<div id="top">
         	<a href="?">
             	        <img src="./icon/0416.jpg" style="width: 500px;">
@@ -23,12 +23,14 @@
                         <a href="?do=login">會員登入</a> |
                         <a href="?do=admin">管理登入</a>
                 </div>
-        情人節特惠活動 &nbsp; 為了慶祝七夕情人節，將舉辦情人兩人到現場有七七折之特惠活動~        
+          
         </div>
 
         <div id="left" class="ct">
         	<div style="min-height:400px;">
-        	            </div>
+        	
+                </div>
+                
                 <span>
             	        <div>進站總人數</div>
                         <div style="color:#f00; font-size:28px;">
