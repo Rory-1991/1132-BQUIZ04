@@ -13,20 +13,39 @@
 </div>
 
 <table class="all">
+    <?php
+    $bigs=$Type->all(['big_id'=>0]);
+    foreach($bigs as $big):
+    ?>
     <tr>
-        <td class="tt">流行皮件</td>
-        <td class="tt ct"><button>修改</button><button>刪除</button></td>
+        <td class="tt"><?=$big['name'];?></td>
+        <td class="tt ct">
+            <button data-id="<?=$big['id'];?>">修改</button>
+            <button>刪除</button>
+        </td>
     </tr>
-    <tr class='ct'>
-        <td class="pp">女用皮件</td>
-        <td class="pp"><button>修改</button><button>刪除</button></td>
-    </tr>
-    <tr class='ct'>
-        <td class="pp">男用皮件</td>
-        <td class="pp"><button>修改</button><button>刪除</button></td>
-    </tr>
-</table>
+    <?php
+    if($Type->count(['big_id'=>$big['id']])>0):
+        $mids=$Type->all(['big_id'=>$big['id']]);
+        foreach($mids as $mid):
+    ?>
+            <tr class='ct'>
+                <td class="pp"><?=$mid['name'];?></td>
+                <td class="pp">
+                    <button data-id="<?=$mid['id'];?>">修改</button>
+                    <button>刪除</button>
+                </td>
+            </tr>
+    <?php
+        endforeach;
+    endif;
+    ?>
 
+    <?php
+    endforeach;
+    ?>
+
+</table>
 <script>
 getBigs();
 
@@ -38,21 +57,29 @@ function addType(type){
             big_id=0;
             break;
         case 'mid':
-            name=$("#mid").val();   
-            bigId=$("#selbig").val();
-        }
-            $.post("./api/add_types.php",{name,big_id},function(){
+            name=$("#mid").val();
+            big_id=$("#selbig").val();
+            break;
+    }
+
+    $.post("./api/save_types.php",{name,big_id},function(){
+                /* if(type=='big'){
+                    getBigs();
+                    $("#big").val("");
+                }else{
+                    $("#mid").val("");
+                } */
                 location.reload();
             })
 }
 
 function getBigs(){
-    $.get("./api/add_types.php",function(bigs){
-        $("$selbig").html
+    $.get("./api/get_bigs.php",function(bigs){
+        $("#selbig").html(bigs)
     })
 }
-
 </script>
+
 
 
 <h2 class="ct">商品管理</h2>
@@ -69,8 +96,8 @@ function getBigs(){
         <td class="ct">操作</td>
     </tr>
     <tr class="pp">
-        <td class="ct">1</td>
-        <td>2</td>
+        <td class="ct"></td>
+        <td></td>
         <td class="ct"></td>
         <td class="ct"></td>
         <td class="ct"></td>
