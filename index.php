@@ -71,7 +71,7 @@
         if(file_exists($file)){
             include $file;
         }else{
-            include "front/main.php"; 
+            include "front/main.php";
         }
 
 
