@@ -1,28 +1,70 @@
-
-<!-- table.all>(tr.tt.ct>td*3)+(tr.pp.ct>td*3) -->
-
-<?php //echo serialize([1,2,3,4,5]); ?>
-<table class="all">
-    <tr class="tt ct">
-        <td>姓名</td>
-        <td>會員帳號</td>
-        <td>註冊日期</td>
-        <td>操作</td>
-    </tr>
-    <?php
-    $rows=$Mem->all();
-    foreach($rows as $row):
-    ?>
-    <tr class="pp ct">
-        <td><?=$row['name'];?></td>
-        <td><?=$row['acc'];?></td>
-        <td><?=date("Y-m-d",strtotime($row['regdate']));?></td>
-        <td>
-            <button onclick="location.href='?do=edit_mem&id=<?=$row['id'];?>'">修改</button>
-            <button onclick="del('Mem',<?=$row['id'];?>)">刪除</button>
-        </td>
-    </tr>
-    <?php
-    endforeach;
-    ?>
-</table>
+<?php
+$nav='';
+$typeId=$_GET['type']??0;
+if($typeId==0){
+    $nav="全部商品";
+}else{
+    $type=$Type->find($typeId);
+    if($type['big_id']==0){
+        $nav=$type['name'];
+    }else{
+        $big=$Type->find($type['big_id']);
+        $nav=$big['name'] ." > ". $type['name'];
+    }
+    
+}
+?>
+<h2><?=$nav;?></h2>
+<style>
+    .item{
+        display: flex;
+        margin: 3px auto;
+        width:85%;
+    }
+    .item div{
+        padding:5px;
+        border:1px solid white;
+    }
+    .item>div:nth-child(1){
+        width:40%;
+    }
+    .item>div:nth-child(2){
+        width:60%;
+    }
+</style>
+<?php 
+if($typeId==0){
+    $rows=$Item->all();
+}else if($type['big_id']==0){
+    $rows=$Item->all(['big'=>$typeId]);
+}else{
+    $rows=$Item->all(['mid'=>$typeId]);
+}
+?>
+<?php
+foreach($rows as $row):
+?>
+    <div class='item'>
+    <div class='pp'>
+        <a href="?do=detail&id=<?=$row['id'];?>">
+            <img src="./img/<?=$row['img'];?>" style="width:200px;height:160px">
+        </a>
+    </div>
+    <div>
+        <div class='tt ct'>
+            <?=$row['name'];?>
+            
+        </div>
+        <div class='pp'>
+            價錢:<?=$row['price'];?>
+            <a href="?do=buycart&id=<?=$row['id'];?>&qt=1">
+                <img src="./icon/0402.jpg" style="float:right">
+            </a>
+        </div>
+        <div class='pp'>規格:<?=$row['spec'];?></div>
+        <div class='pp'>簡介:<?=mb_substr($row['intro'],0,20);?>...</div>
+    </div>
+</div>
+<?php
+endforeach;
+?>
