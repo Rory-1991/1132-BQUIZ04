@@ -34,6 +34,6 @@ $row=$Mem->find($_GET['id']);
     <input type="hidden" name="id" value="<?=$_GET['id'];?>">
     <input type="submit" value="編輯">
     <input type="reset" value="重置">
-    <input type="button" value="取消" onclick="location.href=?'do=mem'">
+    <input type="button" value="取消" onclick="location.href='?do=mem'">
 </div>
 </form>
