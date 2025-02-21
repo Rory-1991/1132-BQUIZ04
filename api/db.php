@@ -4,7 +4,7 @@ session_start();
 
 
 class DB{
-protected $dsn="mysql:host=localhost;charset=utf8;dbname=db18";
+protected $dsn="mysql:host=localhost;charset=utf8;dbname=db15-4";
 protected $pdo;
 protected $table;
 
@@ -109,7 +109,7 @@ function to($url){
 }
 
 function q($sql){
-    $dsn="mysql:host=localhost;charset=utf8;dbname=db18";
+    $dsn="mysql:host=localhost;charset=utf8;dbname=db15-4";
     $pdo=new PDO($dsn ,'root','');
     return $pdo->query($sql)->fetchALL();
 }
